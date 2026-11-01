@@ -1,0 +1,28 @@
+SMART IOT FAULT SYSTEM V3.0 — QUICK PIN CONNECTIONS
+
+ESP32 DevKit V1 (30-pin)
+GPIO32 <- ACS712 OUT via verified 10k/10k divider (signal only)
+GPIO34 <- Input voltage sensor S via verified divider
+GPIO35 <- Output voltage sensor S via verified divider
+GPIO21 <-> I2C level shifter LV SDA; HV SDA <-> LCD SDA
+GPIO22 <-> I2C level shifter LV SCL; HV SCL <-> LCD SCL
+GPIO16 -> 220R -> Green LED anode; LED cathode -> GND
+GPIO17 -> 220R -> Yellow LED anode; LED cathode -> GND
+GPIO23 -> 220R -> Red LED anode; LED cathode -> GND
+GPIO27 -> 220R -> Blue LED anode; LED cathode -> GND
+GPIO14 -> 220R -> White LED anode; LED cathode -> GND
+GPIO25 -> suitable transistor driver -> buzzer
+GPIO26 -> relay IN (relay output remains OFF; do not use as safety isolation)
+
+Power:
+12V adapter + -> correctly rated DC fuse -> main switch -> test circuit positive.
+Adapter negative -> circuit return. LM2596 input across fused/switched supply as planned;
+adjust LM2596 output to 5.0V and verify with multimeter before connecting ESP32 VIN/5V.
+Do not feed 12V into 5V/VIN. Confirm the exact ESP32 board power-input marking.
+
+Sensor current path:
+Supply positive -> ACS712 IP+; ACS712 IP- -> load positive. The sensor is in series.
+Voltage sensor 1 is across the input supply; sensor 2 is across the load/output.
+Observe sensor polarity and module labels. Keep the whole demonstration isolated 12V DC.
+
+Physical rocker switches are power/load-path switches, not GPIO inputs. Do not short the supply.
